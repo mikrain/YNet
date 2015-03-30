@@ -1,0 +1,97 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "YnetUn", "YnetUn", "{74CBE8BB-14DF-471A-9F00-1943D082CCC1}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "YnetUn.Shared", "YnetUn\YnetUn.Shared\YnetUn.Shared.shproj", "{C76F5D7A-2579-4140-A315-92FE1B524083}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YnetUn.Windows", "YnetUn\YnetUn.Windows\YnetUn.Windows.csproj", "{242566D5-AC72-40D6-ABA6-3ED21989623C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YnetUn.WindowsPhone", "YnetUn\YnetUn.WindowsPhone\YnetUn.WindowsPhone.csproj", "{7410540F-FC5C-4E57-898F-783180D64645}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{B5159A6F-D737-4BE5-ABCB-2C4149F307C3}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		YnetUn\YnetUn.Shared\YnetUn.Shared.projitems*{242566d5-ac72-40d6-aba6-3ed21989623c}*SharedItemsImports = 4
+		YnetUn\YnetUn.Shared\YnetUn.Shared.projitems*{7410540f-fc5c-4e57-898f-783180d64645}*SharedItemsImports = 4
+		YnetUn\YnetUn.Shared\YnetUn.Shared.projitems*{c76f5d7a-2579-4140-a315-92fe1b524083}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Debug|ARM.ActiveCfg = Debug|ARM
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Debug|ARM.Build.0 = Debug|ARM
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Debug|ARM.Deploy.0 = Debug|ARM
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Debug|x64.ActiveCfg = Debug|x64
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Debug|x64.Build.0 = Debug|x64
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Debug|x64.Deploy.0 = Debug|x64
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Debug|x86.ActiveCfg = Debug|x86
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Debug|x86.Build.0 = Debug|x86
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Debug|x86.Deploy.0 = Debug|x86
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Release|ARM.ActiveCfg = Release|ARM
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Release|ARM.Build.0 = Release|ARM
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Release|ARM.Deploy.0 = Release|ARM
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Release|x64.ActiveCfg = Release|x64
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Release|x64.Build.0 = Release|x64
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Release|x64.Deploy.0 = Release|x64
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Release|x86.ActiveCfg = Release|x86
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Release|x86.Build.0 = Release|x86
+		{242566D5-AC72-40D6-ABA6-3ED21989623C}.Release|x86.Deploy.0 = Release|x86
+		{7410540F-FC5C-4E57-898F-783180D64645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7410540F-FC5C-4E57-898F-783180D64645}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7410540F-FC5C-4E57-898F-783180D64645}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7410540F-FC5C-4E57-898F-783180D64645}.Debug|ARM.ActiveCfg = Debug|ARM
+		{7410540F-FC5C-4E57-898F-783180D64645}.Debug|ARM.Build.0 = Debug|ARM
+		{7410540F-FC5C-4E57-898F-783180D64645}.Debug|ARM.Deploy.0 = Debug|ARM
+		{7410540F-FC5C-4E57-898F-783180D64645}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7410540F-FC5C-4E57-898F-783180D64645}.Debug|x86.ActiveCfg = Debug|x86
+		{7410540F-FC5C-4E57-898F-783180D64645}.Debug|x86.Build.0 = Debug|x86
+		{7410540F-FC5C-4E57-898F-783180D64645}.Debug|x86.Deploy.0 = Debug|x86
+		{7410540F-FC5C-4E57-898F-783180D64645}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7410540F-FC5C-4E57-898F-783180D64645}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7410540F-FC5C-4E57-898F-783180D64645}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{7410540F-FC5C-4E57-898F-783180D64645}.Release|ARM.ActiveCfg = Release|ARM
+		{7410540F-FC5C-4E57-898F-783180D64645}.Release|ARM.Build.0 = Release|ARM
+		{7410540F-FC5C-4E57-898F-783180D64645}.Release|ARM.Deploy.0 = Release|ARM
+		{7410540F-FC5C-4E57-898F-783180D64645}.Release|x64.ActiveCfg = Release|Any CPU
+		{7410540F-FC5C-4E57-898F-783180D64645}.Release|x86.ActiveCfg = Release|x86
+		{7410540F-FC5C-4E57-898F-783180D64645}.Release|x86.Build.0 = Release|x86
+		{7410540F-FC5C-4E57-898F-783180D64645}.Release|x86.Deploy.0 = Release|x86
+		{B5159A6F-D737-4BE5-ABCB-2C4149F307C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5159A6F-D737-4BE5-ABCB-2C4149F307C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5159A6F-D737-4BE5-ABCB-2C4149F307C3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{B5159A6F-D737-4BE5-ABCB-2C4149F307C3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B5159A6F-D737-4BE5-ABCB-2C4149F307C3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B5159A6F-D737-4BE5-ABCB-2C4149F307C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5159A6F-D737-4BE5-ABCB-2C4149F307C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5159A6F-D737-4BE5-ABCB-2C4149F307C3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{B5159A6F-D737-4BE5-ABCB-2C4149F307C3}.Release|x64.ActiveCfg = Release|Any CPU
+		{B5159A6F-D737-4BE5-ABCB-2C4149F307C3}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C76F5D7A-2579-4140-A315-92FE1B524083} = {74CBE8BB-14DF-471A-9F00-1943D082CCC1}
+		{242566D5-AC72-40D6-ABA6-3ED21989623C} = {74CBE8BB-14DF-471A-9F00-1943D082CCC1}
+		{7410540F-FC5C-4E57-898F-783180D64645} = {74CBE8BB-14DF-471A-9F00-1943D082CCC1}
+		{B5159A6F-D737-4BE5-ABCB-2C4149F307C3} = {74CBE8BB-14DF-471A-9F00-1943D082CCC1}
+	EndGlobalSection
+EndGlobal
