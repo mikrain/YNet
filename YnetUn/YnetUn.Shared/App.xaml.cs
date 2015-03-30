@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
+using YnetUn.Common;
 
 namespace YnetUn
 {
@@ -57,14 +58,16 @@ namespace YnetUn
             }
 #endif
 
-             RootFrame = Window.Current.Content as Frame;
+            RootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (RootFrame == null)
             {
-                // Create a Frame to act as the navigation context and navigate to the first page
+
+
                 RootFrame = new Frame();
+
 
                 // TODO: change this value to a cache size that is appropriate for your application
                 RootFrame.CacheSize = 1;
@@ -137,6 +140,6 @@ namespace YnetUn
             deferral.Complete();
         }
 
-      
+
     }
 }

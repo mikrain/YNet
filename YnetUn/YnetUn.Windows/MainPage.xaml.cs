@@ -17,41 +17,46 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+using YnetUn.Common;
 
 namespace YnetUn
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : BasePage
     {
         private string _navLink;
 
         public MainPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            YnetManager ynetManager = new YnetManager();
-            GetMainHeader(ynetManager);
-            GetMainPage(ynetManager);
+            if (e.NavigationMode == NavigationMode.New)
+            {
+                GetMainHeader();
+                GetMainPage(); 
+            }
+           
             base.OnNavigatedTo(e);
         }
 
-        private async void GetMainPage(YnetManager ynetManager)
+        private async void GetMainPage()
         {
-            var channels = await ynetManager.GetMainPage();
+            var channels = await YnetManager.GetMainPage();
             grdNews.ItemsSource = channels.Items;
 
             ShowFirstMain.BeginTime = TimeSpan.FromSeconds(2);
             ShowFirstMain.Begin();
         }
 
-        private async void GetMainHeader(YnetManager ynetManager)
+        private async void GetMainHeader()
         {
-            var channel = await ynetManager.GetMainHeader();
+            var channel = await YnetManager.GetMainHeader();
             SetMainNew(channel);
             lstMainHeader.ItemsSource = channel.Items;
         }
@@ -64,22 +69,27 @@ namespace YnetUn
             txtMainDesc.Text = mainNew.Description;
             channel.Items.RemoveAt(0);
             _navLink = string.Format("http://www.ynet.co.il/Iphone/Html/0,13406,L-Article-V7-{0}-WP8,00.html", mainNew.YnetGuid);
-          
+
         }
 
-        private async void LstMainHeader_OnItemClick(object sender, ItemClickEventArgs e)
+        private void LstMainHeader_OnItemClick(object sender, ItemClickEventArgs e)
         {
             var headline = e.ClickedItem as Headline;
             WebPopup popup = new WebPopup();
             popup.Show(string.Format("http://www.ynet.co.il/Iphone/Html/0,13406,L-Article-V7-{0}-WP8,00.html", headline.YnetGuid));
         }
 
-   
-
         private void ImgMain_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             WebPopup popup = new WebPopup();
-            popup.Show(_navLink);   
+            popup.Show(_navLink);
+        }
+
+        private void GrdNews_OnItemClick(object sender, ItemClickEventArgs e)
+        {
+            var frame = Window.Current.Content as Frame;
+            var item = e.ClickedItem as Items;
+            if (frame != null && item != null) frame.Navigate(typeof(SubCategory), item.MainGuid);
         }
     }
 }

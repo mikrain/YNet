@@ -30,5 +30,12 @@ namespace YnetUn
             var mainCategories = _xmlHelper.Serilalize<RssMain>(categoriesString);
             return mainCategories.Channel;
         }
+
+        internal async Task<MainTopChannel> GetSubCategory(string mainGuid)
+        {
+            var stripsString = await _networkManager.GetContent(string.Format(EndPointsConstants.MainSubCategory, mainGuid));
+            var mainStrips = _xmlHelper.Serilalize<RssMain>(stripsString);
+            return mainStrips.Channel;
+        }
     }
 }

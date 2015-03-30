@@ -1,0 +1,203 @@
+﻿<common:BasePage
+    x:Name="pageRoot"
+    x:Class="YnetUn.SubCategory"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:YnetUn"
+    xmlns:common="using:YnetUn.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    
+    <common:BasePage.Resources>
+        
+        
+        
+        <!-- Collection of items displayed by this page -->
+        <DataTemplate x:Key="StripNewsTemplate">
+            <Grid Background="#0EFFFFFF" Width="500">
+
+                <Border Grid.ColumnSpan="2" BorderThickness="0,0,0,1" Padding="10,10,10,15" BorderBrush="Black">
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap" FontWeight="SemiBold" FontSize="21.333" Foreground="Black" VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Title}"/>
+                        <Grid Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*"/>
+                                <ColumnDefinition Width="80*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image VerticalAlignment="Center" Source="{Binding Link}" Stretch="Fill"/>
+                            <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontWeight="SemiLight" TextTrimming="CharacterEllipsis" FontSize="17.333" Foreground="Black" Grid.ColumnSpan="2" Grid.Column="1" Margin="15,0,0,0" Text="{Binding SubTitle}" MaxLines="4"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </DataTemplate>
+        <Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="TabNavigation" Value="Local"/>
+            <Setter Property="IsHoldingEnabled" Value="True"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <ListViewItemPresenter CheckHintBrush="{ThemeResource ListViewItemCheckHintThemeBrush}" CheckBrush="{ThemeResource ListViewItemCheckThemeBrush}" ContentMargin="4" ContentTransitions="{TemplateBinding ContentTransitions}" CheckSelectingBrush="{ThemeResource ListViewItemCheckSelectingThemeBrush}" DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}" DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}" DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" FocusBorderBrush="{ThemeResource ListViewItemFocusBorderThemeBrush}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" PointerOverBackgroundMargin="1" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" PointerOverBackground="{ThemeResource ListViewItemPointerOverBackgroundThemeBrush}" ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" SelectedPointerOverBorderBrush="{ThemeResource ListViewItemSelectedPointerOverBorderThemeBrush}" SelectionCheckMarkVisualEnabled="True" SelectedForeground="{ThemeResource ListViewItemSelectedForegroundThemeBrush}" SelectedPointerOverBackground="{ThemeResource ListViewItemSelectedPointerOverBackgroundThemeBrush}" SelectedBorderThickness="{ThemeResource ListViewItemCompactSelectedBorderThemeThickness}" SelectedBackground="{ThemeResource ListViewItemSelectedBackgroundThemeBrush}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Margin" Value="5,0,5,2"/>
+        </Style>
+        <DataTemplate x:Key="NewsTemplate">
+            <Grid>
+                <ListView ItemClick="LstMainHeader_OnItemClick" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Auto" ItemsSource="{Binding Headline}" ItemTemplate="{StaticResource StripNewsTemplate}" x:Name="lstMainHeader" IsItemClickEnabled="True" SelectionMode="None" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsZoomedInView="False" ItemContainerStyle="{StaticResource ListViewItemStyle1}" VerticalAlignment="Top" Margin="0,80,0,0" IsTapEnabled="False" IsSwipeEnabled="False" IsHoldingEnabled="False" VerticalContentAlignment="Top">
+
+                    <ListViewItem ContentTemplate="{StaticResource StripNewsTemplate}"/>
+                    <ListViewItem ContentTemplate="{StaticResource StripNewsTemplate}"/>
+                    <ListViewItem ContentTemplate="{StaticResource StripNewsTemplate}"/>
+                    <ListViewItem ContentTemplate="{StaticResource StripNewsTemplate}"/>
+                </ListView>
+                <Grid Height="60" VerticalAlignment="Top" >
+                    <Rectangle Fill="#FF000070" Margin="0,0,38,0"/>
+                    <Rectangle Fill="#FF000070" Margin="0" Height="30" VerticalAlignment="Top"/>
+                    <Ellipse Fill="#FF000070" HorizontalAlignment="Right" Height="60" VerticalAlignment="Top" Width="75" Margin="0"/>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding MainTitle}" VerticalAlignment="Center" Foreground="White" FontSize="40" FontWeight="SemiLight" Padding="0,0,0,2"/>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+        <Style x:Key="GridViewItemStyle1" TargetType="GridViewItem">
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="TabNavigation" Value="Local"/>
+            <Setter Property="IsHoldingEnabled" Value="True"/>
+            <Setter Property="Margin" Value="0,0,2,2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridViewItem">
+                        <GridViewItemPresenter CheckHintBrush="{ThemeResource ListViewItemCheckHintThemeBrush}" CheckBrush="{ThemeResource ListViewItemCheckThemeBrush}" ContentMargin="4" ContentTransitions="{TemplateBinding ContentTransitions}" CheckSelectingBrush="{ThemeResource ListViewItemCheckSelectingThemeBrush}" DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}" DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}" DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" FocusBorderBrush="{ThemeResource ListViewItemFocusBorderThemeBrush}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" PointerOverBackgroundMargin="1" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" PointerOverBackground="{ThemeResource ListViewItemPointerOverBackgroundThemeBrush}" ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" SelectedPointerOverBorderBrush="{ThemeResource ListViewItemSelectedPointerOverBorderThemeBrush}" SelectionCheckMarkVisualEnabled="True" SelectedForeground="{ThemeResource ListViewItemSelectedForegroundThemeBrush}" SelectedPointerOverBackground="{ThemeResource ListViewItemSelectedPointerOverBackgroundThemeBrush}" SelectedBorderThickness="{ThemeResource GridViewItemCompactSelectedBorderThemeThickness}" SelectedBackground="{ThemeResource ListViewItemSelectedBackgroundThemeBrush}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        </Style>
+        <Style x:Key="AppBarButtonStyle1" TargetType="AppBarButton">
+        	<Setter Property="Foreground" Value="{ThemeResource AppBarItemForegroundThemeBrush}"/>
+        	<Setter Property="VerticalAlignment" Value="Top"/>
+        	<Setter Property="HorizontalAlignment" Value="Left"/>
+        	<Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+        	<Setter Property="FontWeight" Value="Normal"/>
+        	<Setter Property="Template">
+        		<Setter.Value>
+        			<ControlTemplate TargetType="AppBarButton">
+        				<Grid x:Name="RootGrid" Background="#D8000000" Width="100" Height="60">
+        					<VisualStateManager.VisualStateGroups>
+        						<VisualStateGroup x:Name="ApplicationViewStates">
+        							<VisualState x:Name="FullSize"/>
+        							<VisualState x:Name="Compact">
+        								<Storyboard>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Storyboard.TargetName="RootGrid">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="60"/>
+        									</ObjectAnimationUsingKeyFrames>
+        								</Storyboard>
+        							</VisualState>
+        						</VisualStateGroup>
+        						<VisualStateGroup x:Name="CommonStates">
+        							<VisualState x:Name="Normal"/>
+        							<VisualState x:Name="PointerOver">
+        								<Storyboard>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="BackgroundEllipse">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarItemPointerOverBackgroundThemeBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="Content">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarItemPointerOverForegroundThemeBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        								</Storyboard>
+        							</VisualState>
+        							<VisualState x:Name="Pressed">
+        								<Storyboard>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke" Storyboard.TargetName="OutlineEllipse">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarItemForegroundThemeBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="BackgroundEllipse">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarItemForegroundThemeBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="Content">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarItemPressedForegroundThemeBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        								</Storyboard>
+        							</VisualState>
+        							<VisualState x:Name="Disabled">
+        								<Storyboard>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke" Storyboard.TargetName="OutlineEllipse">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarItemDisabledForegroundThemeBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="Content">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarItemDisabledForegroundThemeBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        								</Storyboard>
+        							</VisualState>
+        						</VisualStateGroup>
+        						<VisualStateGroup x:Name="FocusStates">
+        							<VisualState x:Name="Focused">
+        								<Storyboard>
+        									<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualWhite"/>
+        									<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualBlack"/>
+        								</Storyboard>
+        							</VisualState>
+        							<VisualState x:Name="Unfocused"/>
+        							<VisualState x:Name="PointerFocused"/>
+        						</VisualStateGroup>
+        					</VisualStateManager.VisualStateGroups>
+        					<Grid HorizontalAlignment="Center" Height="40" Width="40" VerticalAlignment="Center">
+        						<Ellipse x:Name="BackgroundEllipse" Fill="{ThemeResource AppBarItemBackgroundThemeBrush}" Height="40" UseLayoutRounding="False" Width="40"/>
+        						<Ellipse x:Name="OutlineEllipse" Height="40" Stroke="{ThemeResource AppBarItemForegroundThemeBrush}" StrokeThickness="2" UseLayoutRounding="False" Width="40" Visibility="Collapsed"/>
+        						<ContentPresenter x:Name="Content" AutomationProperties.AccessibilityView="Raw" Content="{TemplateBinding Icon}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" FontWeight="Bold">
+        							<ContentPresenter.RenderTransform>
+        								<CompositeTransform ScaleX="1.2" ScaleY="1.2"/>
+        							</ContentPresenter.RenderTransform>
+        						</ContentPresenter>
+        					</Grid>
+        					<Rectangle x:Name="FocusVisualWhite" IsHitTestVisible="False" Opacity="0" StrokeDashOffset="1.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}" StrokeDashArray="1,1"/>
+        					<Rectangle x:Name="FocusVisualBlack" IsHitTestVisible="False" Opacity="0" StrokeDashOffset="0.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}" StrokeDashArray="1,1"/>
+        				</Grid>
+        			</ControlTemplate>
+        		</Setter.Value>
+        	</Setter>
+        </Style>
+    </common:BasePage.Resources>
+
+    <!--
+        This grid acts as a root panel for the page that defines two rows:
+        * Row 0 contains the back button and page title
+        * Row 1 contains the rest of the page layout
+    -->
+    <Grid FlowDirection="RightToLeft" Background="White">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Image Source="Assets/1.7.2011.png" Width="{Binding ActualWidth, ElementName=page}" Height="{Binding ActualHeight, ElementName=page}" Opacity="0.1"/>
+        <GridView  x:Name="grdNews" ItemTemplate="{StaticResource NewsTemplate}"  ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectionMode="None" ItemContainerStyle="{StaticResource GridViewItemStyle1}" IsRightTapEnabled="False" IsSwipeEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Margin="0,0,0,0" IsZoomedInView="False" IsTapEnabled="False" >
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+            <!--<GridViewItem ContentTemplate="{StaticResource NewsTemplate}" VerticalContentAlignment="Stretch" Background="{x:Null}"/>-->
+            <!--<GridViewItem ContentTemplate="{StaticResource NewsTemplate}" Background="{x:Null}" Margin="0,0,0,2" Style="{StaticResource GridViewItemStyle1}" VerticalContentAlignment="Stretch"/>-->
+        </GridView>
+        <AppBarButton Click="ButtonBase_OnClick" HorizontalAlignment="Right" Icon="Back" Label="" VerticalAlignment="Top" Foreground="White" Background="#7F000000" BorderBrush="Black" BorderThickness="1" Style="{StaticResource AppBarButtonStyle1}" Margin="0,5,5,0"/>
+        <ProgressBar Name="prgBar" Height="10" VerticalAlignment="Center" IsIndeterminate="True" Foreground="#FFC30000" FlowDirection="LeftToRight"/>
+
+        <!-- Horizontal scrolling grid -->
+
+        <!-- Back button and page title -->
+    </Grid>
+</common:BasePage>
