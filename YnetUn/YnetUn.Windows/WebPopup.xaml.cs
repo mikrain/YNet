@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.System;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -40,15 +42,30 @@ namespace YnetUn
             popup.IsLightDismissEnabled = true;
             ShowPopup.Begin();
         }
+
+        private bool CheckNet()
+        {
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                MessageDialog dialog = new MessageDialog("... אנא בדוק את חיבור האינטרנט שלך ");
+                dialog.ShowAsync();
+                return false;
+            }
+            return true;
+        }
+
         private void WebMain_OnNavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
-            if (args.Uri!=null)
+           
+            if (args.Uri != null)
             {
                 if (args.Uri.ToString() != _url)
                 {
                     args.Cancel = true;
                     if (args.Uri.ToString().Contains(".mp4"))
                     {
+                        if (!CheckNet()) return;
+                        prgRing.IsActive = true;
                         mediaElement.Source = args.Uri;
                         VisualStateManager.GoToState(this, "Video", true);
                     }
@@ -58,12 +75,44 @@ namespace YnetUn
                     }
                 }
             }
-           
+
         }
 
         private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            popup.IsOpen = false;
+            if (e.OriginalSource is Grid && (e.OriginalSource as Grid).Name == "grid")
+            {
+                popup.IsOpen = false;
+            }
+
+        }
+
+        private void MediaElement_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (mediaElement.CurrentState == MediaElementState.Playing)
+            {
+                mediaElement.Pause();
+            }
+            else
+            {
+                mediaElement.Play();
+            }
+        }
+
+        private void AppBarButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            mediaElement.Stop();
+            VisualStateManager.GoToState(this, "Normal", true);
+        }
+
+        private void MediaElement_OnMediaOpened(object sender, RoutedEventArgs e)
+        {
+            prgRing.IsActive = false;
+        }
+
+        private void MediaElement_OnMediaFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "Normal", true);
         }
     }
 }

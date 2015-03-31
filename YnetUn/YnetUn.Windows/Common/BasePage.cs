@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -10,15 +13,41 @@ namespace YnetUn.Common
 {
     public class BasePage : Page
     {
-        protected static YnetManager YnetManager = new YnetManager();
+        protected static readonly YnetManager YnetManager = new YnetManager();
         private readonly NavigationHelper _navigationHelper;
 
-        public BasePage()
+        protected BasePage()
         {
             this._navigationHelper = new NavigationHelper(this);
+            this.SizeChanged += MainPage_SizeChanged; 
         }
 
-        public NavigationHelper NavigationHelper
+        protected bool CheckNet()
+        {
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+
+                MessageDialog dialog = new MessageDialog("... אנא בדוק את חיבור האינטרנט שלך");
+                dialog.ShowAsync();
+                return false;
+            }
+            return true;
+        }
+
+
+        void MainPage_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.NewSize.Width < 900)
+            {
+                VisualStateManager.GoToState(this, "Minimal", true);
+            }
+            else
+            {
+                VisualStateManager.GoToState(this, "Normal", true);
+            }
+        }
+
+        protected NavigationHelper NavigationHelper
         {
             get { return _navigationHelper; }
         }

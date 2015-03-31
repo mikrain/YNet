@@ -8,55 +8,47 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-	<UserControl.Resources>
-		<Storyboard x:Name="ShowPopup">
-			<DoubleAnimation Duration="0:0:0.1" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid" d:IsOptimized="True"/>
-			<DoubleAnimation Duration="0:0:0.1" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="webView" d:IsOptimized="True"/>
-			<DoubleAnimation Duration="0:0:0.1" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="webView" d:IsOptimized="True"/>
-		</Storyboard>
-	</UserControl.Resources>
+    <UserControl.Resources>
+        <Storyboard x:Name="ShowPopup">
+            <DoubleAnimation Duration="0:0:0.1" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.1" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="webView" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.1" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="webView" d:IsOptimized="True"/>
+        </Storyboard>
+    </UserControl.Resources>
 
     <Grid x:Name="grid" Tapped="UIElement_OnTapped" Background="#CC000000" Opacity="0">
-    	<VisualStateManager.VisualStateGroups>
-    		<VisualStateGroup x:Name="ShowGroups">
-    			<VisualState x:Name="Normal"/>
-    			<VisualState x:Name="Video">
-    				<Storyboard>
-    					<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="mediaElement">
-    						<DiscreteObjectKeyFrame KeyTime="0">
-    							<DiscreteObjectKeyFrame.Value>
-    								<Visibility>Visible</Visibility>
-    							</DiscreteObjectKeyFrame.Value>
-    						</DiscreteObjectKeyFrame>
-    					</ObjectAnimationUsingKeyFrames>
-    					<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="webView">
-    						<DiscreteObjectKeyFrame KeyTime="0">
-    							<DiscreteObjectKeyFrame.Value>
-    								<Visibility>Collapsed</Visibility>
-    							</DiscreteObjectKeyFrame.Value>
-    						</DiscreteObjectKeyFrame>
-    					</ObjectAnimationUsingKeyFrames>
-    					<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="appBarButton">
-    						<DiscreteObjectKeyFrame KeyTime="0">
-    							<DiscreteObjectKeyFrame.Value>
-    								<Visibility>Visible</Visibility>
-    							</DiscreteObjectKeyFrame.Value>
-    						</DiscreteObjectKeyFrame>
-    					</ObjectAnimationUsingKeyFrames>
-    				</Storyboard>
-    			</VisualState>
-    		</VisualStateGroup>
-    	</VisualStateManager.VisualStateGroups>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ShowGroups">
+                <VisualState x:Name="Normal"/>
+                <VisualState x:Name="Video">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="videoGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                      
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
-		<Grid Width="800"  HorizontalAlignment="Center" VerticalAlignment="Center">
-			<WebView NavigationStarting="WebMain_OnNavigationStarting"  x:Name="webView" RenderTransformOrigin="0.5,0.5">
-				<WebView.RenderTransform>
-					<CompositeTransform ScaleX="0" ScaleY="0"/>
-				</WebView.RenderTransform>
-			</WebView>
-			<MediaElement x:Name="mediaElement" HorizontalAlignment="Center" VerticalAlignment="Center" AreTransportControlsEnabled="True" Visibility="Collapsed"/>
-			<AppBarButton x:Name="appBarButton" HorizontalAlignment="Left" Icon="Cancel" Label="close" VerticalAlignment="Top" Visibility="Collapsed"/>
-		</Grid>
-        
-	</Grid>
+        <Grid Width="800" HorizontalAlignment="Center" VerticalAlignment="Center">
+           
+                    <WebView  NavigationStarting="WebMain_OnNavigationStarting"  x:Name="webView" RenderTransformOrigin="0.5,0.5">
+                        <WebView.RenderTransform>
+                            <CompositeTransform ScaleX="0" ScaleY="0"/>
+                        </WebView.RenderTransform>
+                    </WebView>
+            <Grid Name="videoGrid" Visibility="Collapsed" Background="#CC000000">
+                <ProgressRing IsActive="True" Name="prgRing" MinHeight="80" MinWidth="80"></ProgressRing>
+                    <MediaElement MediaFailed="MediaElement_OnMediaFailed" MediaOpened="MediaElement_OnMediaOpened" Tapped="MediaElement_OnTapped" x:Name="mediaElement" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <AppBarButton Click="AppBarButton_OnClick" x:Name="appBarButton" HorizontalAlignment="Right" Icon="Cancel" Label="לִסְגוֹר" VerticalAlignment="Top" />
+            </Grid>
+
+        </Grid>
+
+    </Grid>
 </UserControl>

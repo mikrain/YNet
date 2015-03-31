@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -50,9 +51,20 @@ namespace YnetUn
 
         private void LstMainHeader_OnItemClick(object sender, ItemClickEventArgs e)
         {
+            if (!CheckNet()) return;
             var headline = e.ClickedItem as Headline;
-            WebPopup popup = new WebPopup();
-            popup.Show(string.Format("http://www.ynet.co.il/Iphone/Html/0,13406,L-Article-V7-{0}-WP8,00.html", headline.YnetGuid));
+            if (App.RootFrame.ActualWidth < 900)
+            {
+                Launcher.LaunchUriAsync(
+                    new Uri(string.Format("http://www.ynet.co.il/articles/0,7340,L-{0},00.html", headline.YnetGuid)));
+            }
+            else
+            {
+                
+                WebPopup popup = new WebPopup();
+                popup.Show(string.Format("http://www.ynet.co.il/Iphone/Html/0,13406,L-Article-V7-{0}-WP8,00.html",
+                    headline.YnetGuid));
+            }
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

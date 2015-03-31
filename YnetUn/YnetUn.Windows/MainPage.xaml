@@ -66,12 +66,12 @@
 			<Setter Property="Margin" Value="5,0,5,2"/>
 		</Style>
 			<DataTemplate x:Key="NewsTemplate">
-			<Grid><ListView ItemClick="LstMainHeader_OnItemClick" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Auto" ItemsSource="{Binding Headline}" ItemTemplate="{StaticResource StripNewsTemplate}" x:Name="lstMainHeader" IsItemClickEnabled="True" SelectionMode="None" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsZoomedInView="False" ItemContainerStyle="{StaticResource ListViewItemStyle1}" VerticalAlignment="Center" Margin="0">
+			<Grid><ListView ItemClick="LstMainHeader_OnItemClick" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Auto" ItemsSource="{Binding Headline}" ItemTemplate="{StaticResource StripNewsTemplate}" x:Name="lstMainHeader" IsItemClickEnabled="True" SelectionMode="None" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsZoomedInView="False" ItemContainerStyle="{StaticResource ListViewItemStyle1}" VerticalAlignment="Center" Margin="0,60,0,0" IsHoldingEnabled="False" IsTapEnabled="False" IsSwipeEnabled="False">
 					
+					<!--<ListViewItem ContentTemplate="{StaticResource StripNewsTemplate}"/>
 					<ListViewItem ContentTemplate="{StaticResource StripNewsTemplate}"/>
 					<ListViewItem ContentTemplate="{StaticResource StripNewsTemplate}"/>
-					<ListViewItem ContentTemplate="{StaticResource StripNewsTemplate}"/>
-					<ListViewItem ContentTemplate="{StaticResource StripNewsTemplate}"/>
+					<ListViewItem ContentTemplate="{StaticResource StripNewsTemplate}"/>-->
 				</ListView>
 				<Grid Height="60" VerticalAlignment="Top" >
 					<Rectangle Fill="#FF000070" Margin="0,0,38,0"/>
@@ -208,9 +208,46 @@
 	</common:BasePage.Resources>
 
     <Grid x:Name="Root" Background="White" FlowDirection="RightToLeft">
+    	<VisualStateManager.VisualStateGroups>
+    		<VisualStateGroup x:Name="Layouts">
+    			<VisualState x:Name="Normal"/>
+    			<VisualState x:Name="Minimal">
+    				<Storyboard>
+    					<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="DefaultLayout">
+    						<DiscreteObjectKeyFrame KeyTime="0">
+    							<DiscreteObjectKeyFrame.Value>
+    								<Visibility>Collapsed</Visibility>
+    							</DiscreteObjectKeyFrame.Value>
+    						</DiscreteObjectKeyFrame>
+    					</ObjectAnimationUsingKeyFrames>
+    					<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="MinimalLayout">
+    						<DiscreteObjectKeyFrame KeyTime="0">
+    							<DiscreteObjectKeyFrame.Value>
+    								<Visibility>Visible</Visibility>
+    							</DiscreteObjectKeyFrame.Value>
+    						</DiscreteObjectKeyFrame>
+    					</ObjectAnimationUsingKeyFrames>
+    					<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="image">
+    						<DiscreteObjectKeyFrame KeyTime="0">
+    							<DiscreteObjectKeyFrame.Value>
+    								<Visibility>Collapsed</Visibility>
+    							</DiscreteObjectKeyFrame.Value>
+    						</DiscreteObjectKeyFrame>
+    					</ObjectAnimationUsingKeyFrames>
+    					<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="imageMinimal">
+    						<DiscreteObjectKeyFrame KeyTime="0">
+    							<DiscreteObjectKeyFrame.Value>
+    								<Visibility>Visible</Visibility>
+    							</DiscreteObjectKeyFrame.Value>
+    						</DiscreteObjectKeyFrame>
+    					</ObjectAnimationUsingKeyFrames>
+    				</Storyboard>
+    			</VisualState>
+    		</VisualStateGroup>
+    	</VisualStateManager.VisualStateGroups>
 
 		<Image Source="Assets/1.7.2011.png" Width="{Binding ActualWidth, ElementName=page}" Height="{Binding ActualHeight, ElementName=page}" Opacity="0.1"/>
-		<ScrollViewer VerticalScrollMode="Disabled" ZoomMode="Disabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+		<ScrollViewer x:Name="DefaultLayout" VerticalScrollMode="Disabled" ZoomMode="Disabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
 
 			<Grid x:Name="Root1" FlowDirection="RightToLeft">
 				<Grid.ColumnDefinitions>
@@ -229,14 +266,14 @@
                                 <TextBlock Tapped="ImgMain_OnTapped" x:Name="txtMainName" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap"  FontSize="50.667" TextAlignment="Justify" Foreground="Black" Margin="0,0,0,20" FontFamily="Segoe WP"/>
 								<Image Tapped="ImgMain_OnTapped" x:Name="imgMain" HorizontalAlignment="Center"  VerticalAlignment="Center" Stretch="UniformToFill" MinWidth="500" MinHeight="300"/>
                                 <TextBlock Tapped="ImgMain_OnTapped" x:Name="txtMainDesc" TextWrapping="Wrap" FontSize="26.667" Margin="15,40,15,20" TextTrimming="WordEllipsis" HorizontalAlignment="Center" TextAlignment="Justify" Foreground="Black" FontWeight="SemiLight"/>
-                                <ListView ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled"  ItemClick="LstMainHeader_OnItemClick" ItemTemplate="{StaticResource MainStripNewsTemplate}" x:Name="lstMainHeader" HorizontalAlignment="Center" IsItemClickEnabled="True" SelectionMode="None">
+                                <ListView ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled"  ItemClick="LstMainHeader_OnItemClick" ItemTemplate="{StaticResource MainStripNewsTemplate}" x:Name="lstMainHeader" HorizontalAlignment="Center" IsItemClickEnabled="True" SelectionMode="None" IsSwipeEnabled="False" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" IsTapEnabled="False" IsZoomedInView="False">
 									<ListView.ItemsPanel><ItemsPanelTemplate>
 											<ItemsWrapGrid HorizontalAlignment="Center" MaximumRowsOrColumns="2" Orientation="Horizontal"/>
 										</ItemsPanelTemplate></ListView.ItemsPanel>
+									<!--<ListViewItem ContentTemplate="{StaticResource StripNewsTemplate}"/>
 									<ListViewItem ContentTemplate="{StaticResource StripNewsTemplate}"/>
 									<ListViewItem ContentTemplate="{StaticResource StripNewsTemplate}"/>
-									<ListViewItem ContentTemplate="{StaticResource StripNewsTemplate}"/>
-									<ListViewItem ContentTemplate="{StaticResource StripNewsTemplate}"/>
+									<ListViewItem ContentTemplate="{StaticResource StripNewsTemplate}"/>-->
 								</ListView>
 							</StackPanel>
 						</ScrollViewer>
@@ -254,13 +291,52 @@
 				</GridView>
 			</Grid>
 		</ScrollViewer>
-		<Grid x:Name="border" Background="White" Visibility="Visible">
-			<ProgressRing  Foreground="#FFC30000" Margin="0,400,0,0" MinHeight="80" MinWidth="80" IsActive="True"/>
+		<ScrollViewer x:Name="MinimalLayout" ZoomMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" HorizontalScrollMode="Disabled" Visibility="Collapsed">
+
+			<StackPanel x:Name="Root2" FlowDirection="RightToLeft">
+				<Grid Margin="0" HorizontalAlignment="Center" >
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+
+					<StackPanel x:Name="stackPanel1" Orientation="Vertical">
+						<TextBlock Tapped="ImgMain_OnTapped" x:Name="txtMainName1" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap"  FontSize="33.333" TextAlignment="Justify" Foreground="Black" Margin="0,0,0,20" FontFamily="Segoe WP" Text="{Binding Text, ElementName=txtMainName}"/>
+						<Image Tapped="ImgMain_OnTapped" x:Name="imgMain1" HorizontalAlignment="Center"  VerticalAlignment="Center" Stretch="UniformToFill" MinWidth="500" MinHeight="300" Source="{Binding Source, ElementName=imgMain}"/>
+						<TextBlock Tapped="ImgMain_OnTapped" x:Name="txtMainDesc1" TextWrapping="Wrap" FontSize="20" Margin="15,40,15,20" TextTrimming="WordEllipsis" HorizontalAlignment="Center" TextAlignment="Justify" Foreground="Black" FontWeight="SemiLight" Text="{Binding Text, ElementName=txtMainDesc}"/>
+						<ListView ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled"  ItemClick="LstMainHeader_OnItemClick" ItemTemplate="{StaticResource MainStripNewsTemplate}" x:Name="lstMainHeader1" HorizontalAlignment="Center" IsItemClickEnabled="True" SelectionMode="None" ItemsSource="{Binding ItemsSource, ElementName=lstMainHeader}">
+							<ListView.ItemsPanel><ItemsPanelTemplate>
+									<ItemsWrapGrid HorizontalAlignment="Center" MaximumRowsOrColumns="2" Orientation="Horizontal"/>
+								</ItemsPanelTemplate></ListView.ItemsPanel>
+						</ListView>
+					</StackPanel>
+
+				</Grid>
+                <GridView ItemClick="GrdNews_OnItemClick" ItemsSource="{Binding ItemsSource, ElementName=grdNews}"  x:Name="grdNews1" Grid.Column="1" ItemTemplate="{StaticResource NewsTemplate}"   SelectionMode="None" ItemContainerStyle="{StaticResource GridViewItemStyle1}" IsItemClickEnabled="True" IsRightTapEnabled="False" IsSwipeEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" >
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                    <!--<GridViewItem ContentTemplate="{StaticResource NewsTemplate}" VerticalContentAlignment="Stretch" Background="{x:Null}"/>-->
+                    <!--<GridViewItem ContentTemplate="{StaticResource NewsTemplate}" Background="{x:Null}" Margin="0,0,0,2" Style="{StaticResource GridViewItemStyle1}" VerticalContentAlignment="Stretch"/>-->
+                </GridView>
+              
+			</StackPanel>
+		</ScrollViewer>
+		<Grid x:Name="border" Background="White">
+			<ProgressBar x:Name="prgWait" IsIndeterminate="True" Foreground="#FFC30000" Margin="100,400,100,0" MinHeight="20" FlowDirection="LeftToRight"  />
 			<Image x:Name="image" Source="Assets/SplashScreen.png" Stretch="None" RenderTransformOrigin="0.5,0.5">
 				<Image.RenderTransform>
 					<CompositeTransform/>
 				</Image.RenderTransform>
 			</Image>
+			<Image x:Name="imageMinimal" Source="Assets/SplashScreen.scale-320.png" Stretch="None" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed">
+				<Image.RenderTransform>
+					<CompositeTransform SkewY="-0.801" TranslateY="2.236"/>
+				</Image.RenderTransform>
+			</Image>
+			<TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="by Mr." VerticalAlignment="Bottom" Margin="0,0,0,25" Foreground="Black" FlowDirection="LeftToRight" FontFamily="Segoe WP" FontStyle="Italic" FontWeight="SemiBold"/>
 		</Grid>
 	</Grid>
 </common:BasePage>
