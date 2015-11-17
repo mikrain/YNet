@@ -41,7 +41,14 @@ namespace YnetUn
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+            Resuming += App_Resuming;
         }
+
+        private void App_Resuming(object sender, object e)
+        {
+           
+        }
+
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points

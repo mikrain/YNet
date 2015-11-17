@@ -83,5 +83,11 @@ namespace Model
 
         [XmlElement(ElementName = "author")]
         public string Author { get; set; }
+
+        [XmlIgnore]
+        public string RelatedTopic { get; set; }
+
+        [XmlIgnore]
+        public string RelatedGuid { get; set; }
     }
 }
