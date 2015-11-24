@@ -22,6 +22,7 @@ namespace YnetUn
 {
     public sealed partial class WebPopup : UserControl
     {
+        int num = 0;
         Popup popup = new Popup();
         private string _url;
 
@@ -32,6 +33,8 @@ namespace YnetUn
 
         public void Show(string url)
         {
+            CheckAdVisibility();
+
             _url = url;
             this.Width = App.RootFrame.ActualWidth;
             this.Height = App.RootFrame.ActualHeight;
@@ -41,6 +44,31 @@ namespace YnetUn
             popup.IsOpen = true;
             popup.IsLightDismissEnabled = true;
             ShowPopup.Begin();
+        }
+
+        private void CheckAdVisibility()
+        {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
+            if (localSettings.Values.ContainsKey("popupad"))
+            {
+                num = int.Parse(localSettings.Values["popupad"].ToString());
+                if (num == 5)
+                {
+                    adPanel.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    num = num + 1;
+                    if (num > 5) num = 0;
+                    localSettings.Values["popupad"] = num;
+                    adPanel.Visibility = Visibility.Collapsed;
+                }
+            }
+            else
+            {
+                localSettings.Values["popupad"] = num;
+            }
         }
 
         private bool CheckNet()
@@ -56,7 +84,7 @@ namespace YnetUn
 
         private void WebMain_OnNavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
-           
+
             if (args.Uri != null)
             {
                 if (args.Uri.ToString() != _url)
@@ -113,6 +141,12 @@ namespace YnetUn
         private void MediaElement_OnMediaFailed(object sender, ExceptionRoutedEventArgs e)
         {
             VisualStateManager.GoToState(this, "Normal", true);
+        }
+
+        private void AdUnitId_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            e.Handled = true;
+            adPanel.Visibility = Visibility.Collapsed;
         }
     }
 }

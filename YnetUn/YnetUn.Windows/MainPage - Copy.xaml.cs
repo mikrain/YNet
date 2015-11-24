@@ -29,43 +29,16 @@ namespace YnetUn
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : BasePage
+    public sealed partial class MainPage1 : BasePage
     {
-        private int num = 0;
         private Headline _navLink;
 
-        public MainPage()
+        public MainPage1()
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
             App.Current.Resuming += Current_Resuming;
         }
-
-        //private void CheckAdVisibility()
-        //{
-        //    var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-
-        //    if (localSettings.Values.ContainsKey("mainad"))
-        //    {
-        //        num = int.Parse(localSettings.Values["mainad"].ToString());
-        //        if (num == 10)
-        //        {
-        //            adPanel.Visibility = Visibility.Visible;
-        //        }
-        //        else
-        //        {
-        //            num = num + 1;
-        //            if (num > 10) num = 0;
-        //            localSettings.Values["mainad"] = num;
-        //            adPanel.Visibility = Visibility.Collapsed;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        localSettings.Values["mainad"] = num;
-        //    }
-        //}
-
 
         private void Current_Resuming(object sender, object e)
         {
@@ -216,27 +189,7 @@ namespace YnetUn
                 }
             }
 
-            List<IYnet> headsList = new List<IYnet>();
-
-            foreach (var head in headLines)
-            {
-                foreach (var item in head.Headline)
-                {
-                    headsList.Add(item);
-                    if (headsList.Count == 5 || headsList.Count % 21 == 0) headsList.Add(new Mediator());
-                }
-            }
-
-            grdNews.ItemsSource = headsList;
-
-            try
-            {
-                DefaultLayout.ChangeView(0, null, null);
-                MinimalLayout.ChangeView(0, null, null);
-            }
-            catch
-            {
-            }
+            grdNews.ItemsSource = headLines;
         }
 
         private void SetMainNew(List<Headline> channel)
@@ -334,16 +287,5 @@ namespace YnetUn
         {
             e.Handled = true;
         }
-
-        //private void AdUnitId_Tapped(object sender, TappedRoutedEventArgs e)
-        //{
-        //    e.Handled = true;
-        //    adPanel.Visibility = Visibility.Collapsed;
-        //}
-
-        //private void AdUnitId3_AdSdkEvent(object sender, Microsoft.AdMediator.Core.Events.AdSdkEventArgs e)
-        //{
-
-        //}
     }
 }

@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:YnetUn"
+      xmlns:AdMediator="using:Microsoft.AdMediator.Windows81"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -29,24 +30,34 @@
                                 </DiscreteObjectKeyFrame.Value>
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
-                      
+
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
         <Grid Width="800" HorizontalAlignment="Center" VerticalAlignment="Center">
+
            
-                    <WebView  NavigationStarting="WebMain_OnNavigationStarting"  x:Name="webView" RenderTransformOrigin="0.5,0.5">
-                        <WebView.RenderTransform>
-                            <CompositeTransform ScaleX="0" ScaleY="0"/>
-                        </WebView.RenderTransform>
-                    </WebView>
+
+            <WebView  NavigationStarting="WebMain_OnNavigationStarting"  x:Name="webView" RenderTransformOrigin="0.5,0.5">
+                <WebView.RenderTransform>
+                    <CompositeTransform ScaleX="0" ScaleY="0"/>
+                </WebView.RenderTransform>
+            </WebView>
             <Grid Name="videoGrid" Visibility="Collapsed" Background="#CC000000">
+
+               
                 <ProgressRing IsActive="True" Name="prgRing" MinHeight="80" MinWidth="80"></ProgressRing>
-                    <MediaElement MediaFailed="MediaElement_OnMediaFailed" MediaOpened="MediaElement_OnMediaOpened" Tapped="MediaElement_OnTapped" x:Name="mediaElement" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <MediaElement MediaFailed="MediaElement_OnMediaFailed" MediaOpened="MediaElement_OnMediaOpened" Tapped="MediaElement_OnTapped" x:Name="mediaElement" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <AppBarButton Click="AppBarButton_OnClick" x:Name="appBarButton" HorizontalAlignment="Right" Icon="Cancel" Label="לִסְגוֹר" VerticalAlignment="Top" />
             </Grid>
+
+            <StackPanel Name="adPanel" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.01">
+                <AdMediator:AdMediatorControl x:Name="AdUnitId" Width="300" Height="250" Id="AdMediator-Id" Tapped="AdUnitId_Tapped"/>
+                <AdMediator:AdMediatorControl x:Name="AdUnitId1" Width="300" Height="250" Id="AdMediator-Id1" Tapped="AdUnitId_Tapped"/>
+                <AdMediator:AdMediatorControl x:Name="AdUnitId2" Width="300" Height="250" Id="AdMediator-Id2" Tapped="AdUnitId_Tapped"/>
+            </StackPanel>
 
         </Grid>
 

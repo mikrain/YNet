@@ -46,7 +46,7 @@ namespace Model
     }
 
 
-    public class Headline
+    public class Headline : IYnet
     {
         [XmlElement(ElementName = "title")]
         public string Title { get; set; }

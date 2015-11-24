@@ -117,10 +117,15 @@
   <ItemGroup>
     <Compile Include="Common\BasePage.cs" />
     <Compile Include="CacheManager.cs" />
+    <Compile Include="Common\Mediator.cs" />
     <Compile Include="Common\NavigationHelper.cs" />
+    <Compile Include="Common\NewsSelector.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="MainPage - Copy.xaml.cs">
+      <DependentUpon>MainPage - Copy.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -136,6 +141,9 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="AdMediator.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="YnetUn.Windows_StoreKey.pfx" />
     <None Include="YnetUn.Windows_TemporaryKey.pfx" />
   </ItemGroup>
@@ -150,6 +158,10 @@
     <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="MainPage - Copy.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -166,6 +178,12 @@
   <ItemGroup>
     <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
       <Name>BehaviorsXamlSDKManaged</Name>
+    </SDKReference>
+    <SDKReference Include="Microsoft.AdMediatorWindows81, Version=1.0">
+      <Name>Ad Mediator SDK for Windows 8.1 XAML</Name>
+    </SDKReference>
+    <SDKReference Include="Microsoft.VCLibs, Version=12.0">
+      <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
     </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
